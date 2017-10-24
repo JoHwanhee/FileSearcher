@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace FileSearchSinceTime
+namespace FileSearchr.Composite
 {
     public class Directory : Component
     {

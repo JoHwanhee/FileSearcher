@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
+using Directory = FileSearchr.Composite.Directory;
+using File = FileSearchr.Composite.File;
 
-namespace FileSearchSinceTime
+namespace FileSearchr
 {
     public class FileSearchManager : IDisposable
     {

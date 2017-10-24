@@ -1,4 +1,6 @@
-﻿namespace FileSearchSinceTime
+﻿using FileSearchr.Composite;
+
+namespace FileSearchr
 {
     public interface IComponentWriter
     {

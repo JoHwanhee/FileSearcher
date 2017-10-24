@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace FileSearchSinceTime
+namespace FileSearchr
 {
     public class FileSearchConfig
     {

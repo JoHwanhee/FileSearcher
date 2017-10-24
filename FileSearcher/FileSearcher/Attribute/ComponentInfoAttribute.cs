@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace FileSearchSinceTime
+namespace FileSearchr.Attribute
 {
     [AttributeUsage(System.AttributeTargets.All, AllowMultiple = true)]
-    public class ComponentInfoAttribute : Attribute
+    public class ComponentInfoAttribute : System.Attribute
     {
         public string ItemName;
         public string Summary;

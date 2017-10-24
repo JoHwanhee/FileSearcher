@@ -2,8 +2,11 @@
 using System.IO;
 using System.Text;
 using System.Xml;
+using FileSearchr.Composite;
+using Directory = FileSearchr.Composite.Directory;
+using File = FileSearchr.Composite.File;
 
-namespace FileSearchSinceTime
+namespace FileSearchr
 {
     public class XmlComponentWriter : IComponentWriter
     {

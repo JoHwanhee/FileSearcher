@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4D43CC4F-FB13-41AF-A248-B1F694A33542}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>FileSearchSinceTime</RootNamespace>
-    <AssemblyName>FileSearchSinceTime</AssemblyName>
+    <ProjectGuid>{C567F39B-87C7-4551-A3D9-DEE50BFBC75C}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>FileSearchConsole</RootNamespace>
+    <AssemblyName>FileSearchConsole</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -31,9 +31,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -45,18 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Composite\Component.cs" />
-    <Compile Include="Attribute\ComponentInfoAttribute.cs" />
-    <Compile Include="Composite\DirectoryComponent.cs" />
-    <Compile Include="Composite\File.cs" />
-    <Compile Include="FileSearchConfig.cs" />
-    <Compile Include="FileSearchManager.cs" />
-    <Compile Include="IComponentWriter.cs" />
-    <Compile Include="XmlComponentWriter.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FileSearcher\FileSearcher.csproj">
+      <Project>{4d43cc4f-fb13-41af-a248-b1f694a33542}</Project>
+      <Name>FileSearcher</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
