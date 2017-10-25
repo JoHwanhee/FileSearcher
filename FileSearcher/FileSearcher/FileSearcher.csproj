@@ -52,6 +52,7 @@
     <Compile Include="FileSearchConfig.cs" />
     <Compile Include="FileSearchManager.cs" />
     <Compile Include="IComponentWriter.cs" />
+    <Compile Include="ResultTextWriter.cs" />
     <Compile Include="XmlComponentWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
+using FileSearchr.Composite;
 using Directory = FileSearchr.Composite.Directory;
 using File = FileSearchr.Composite.File;
 
@@ -11,7 +13,10 @@ namespace FileSearchr
         private readonly string _searchDir;
         private readonly string _saveFile;
         private readonly DateTime _compareTime;
-        private readonly Directory _rootDirectory;
+        private Directory _rootDirectory;
+
+        public string[] IgnoreFolders { get; set; } = { "bin", "obj", ".vs", "packages" };
+        public string[] IgnoreFiles { get; set; } = {".dll", ".pdb", ".csproj", ".sln", "Designer.cs", ".resx", "app.config", "packages.config", "App.xaml.cs" };
         
         public FileSearchManager(FileSearchConfig config)
         {
@@ -19,60 +24,76 @@ namespace FileSearchr
             _searchDir = config.SearchDir;
             _saveFile = config.SaveFile;
             _compareTime = config.CompareTime;
-            _rootDirectory = new Directory
-            {
-                Name = "Root",
-                Updated = DateTime.Now
-            };
+            _rootDirectory = new Directory();
         }
 
         public void Write()
         {
-            _componentWriter.Root = _rootDirectory;
-            _componentWriter.Write();
-        }
-
-        public void Save()
-        {
-            _componentWriter.Save(_saveFile);
+            _componentWriter.Write(_rootDirectory, _saveFile);
         }
 
         public void Serach()
         {
-            Search(_rootDirectory, _searchDir, _compareTime);
+            Directory rootDirectory = new Directory();
+            Search(rootDirectory, _searchDir, _compareTime);
+            if (rootDirectory.Children.Count == 1)
+            {
+                _rootDirectory = rootDirectory.Children[0] as Directory;
+            }
+            else
+            {
+                _rootDirectory = rootDirectory;
+            }
         }
 
-        public void Search(Directory directory, string sDir, DateTime compareTime)
+        public void Search(Component parentComponent, string currentFolderName, DateTime compareTime)
         {
             try
             {
-                var comDirectories = System.IO.Directory.GetDirectories(sDir);
+                DirectoryInfo currentDirectoryInfo = new DirectoryInfo(currentFolderName);
+                Directory currentDirectory = new Directory(currentDirectoryInfo);
 
-                foreach (var direcotory in comDirectories)
+                
+                foreach (var file in currentDirectoryInfo.GetFiles())
                 {
-                    DirectoryInfo directoryInfo = new DirectoryInfo(direcotory);
-                    Directory directoryComponent = new Directory { Name = directoryInfo.Name };
-                    
-                    foreach (var file in directoryInfo.GetFiles())
+                    bool isMatched = false;
+                    foreach (string ignoreFile in IgnoreFiles)
                     {
-                        if (file.LastWriteTime >= _compareTime)
+                        if (file.Name.EndsWith(ignoreFile))
                         {
-                            directoryComponent.AddComponent(new File
-                            {
-                                Name = file.Name,
-                                Updated = file.LastWriteTime
-                            });
+                            isMatched = true;
+                            break;
                         }
                     }
+                    if (!isMatched && file.LastWriteTime >= _compareTime)
+                    {
+                        currentDirectory.AddChlid(new File(file));
+                    }
+                }
 
-                    directory.AddComponent(directoryComponent);
-                    Search(directoryComponent, direcotory, compareTime);
+                foreach (var direcotory in System.IO.Directory.GetDirectories(currentFolderName))
+                {
+                    DirectoryInfo directoryInfo = new DirectoryInfo(direcotory);
+
+                    if (IgnoreFolders.Contains(directoryInfo.Name))
+                    {
+                        continue;
+                    }
+
+                    Search(currentDirectory, directoryInfo.FullName, compareTime);
+                }
+
+                if (currentDirectory.Children.Count > 0)
+                {
+                    parentComponent.AddChlid(currentDirectory);
                 }
             }
             catch (Exception excpt)
             {
                 Console.WriteLine(excpt.Message);
             }
+
+
         }
         public void Close()
         {
@@ -81,6 +102,13 @@ namespace FileSearchr
         public void Dispose()
         {
 
+        }
+
+        public void Run()
+        {
+            Serach();
+            Write();
+            Close();
         }
     }
 }

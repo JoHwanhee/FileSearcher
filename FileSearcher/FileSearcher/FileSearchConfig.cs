@@ -14,9 +14,9 @@ namespace FileSearchr
         {
         }
 
-        public string SearchDir = "C:\\Users\\ChoHwanhee\\Documents\\기타 문서";
-        public string SaveFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "output.xml");
-        public DateTime CompareTime = DateTime.Parse("2014-01-24");
-        public IComponentWriter Writer = new XmlComponentWriter(); 
+        public string SearchDir = "D:\\work\\n3n\\src\\iw306\\application\\src";
+        public string SaveFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "output.txt");
+        public DateTime CompareTime = DateTime.Parse("2017-08-08");
+        public IComponentWriter Writer = new ResultTextWriter();
     }
 }

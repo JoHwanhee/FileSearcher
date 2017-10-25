@@ -10,8 +10,13 @@ namespace FileSearchr
 {
     public class XmlComponentWriter : IComponentWriter
     {
-        public Component Root { get; set; }
         private string _xmlString;
+
+        public void Write(Component root, string saveFile)
+        {
+            Write(root as Directory);
+            Save(saveFile);
+        }
 
         public XmlWriterSettings XmlWriterSettings(Encoding encoding = null)
         {
@@ -21,9 +26,8 @@ namespace FileSearchr
             return settings;
         }
 
-        public void Write()
+        public void Write(Directory root)
         {
-            Directory root = Root as Directory;
             try
             {
                 using (StringWriter sw = new StringWriter())
@@ -52,20 +56,20 @@ namespace FileSearchr
                 return;
             }
 
-            foreach (var file in root.GetFiles())
+            foreach (var component in root.Children)
             {
-                switch (file)
+                switch (component)
                 {
                     case Directory folder:
                         xmlWriter.WriteStartElement("Folder");
-                        xmlWriter.WriteAttributeString("name", file.Name);
+                        xmlWriter.WriteAttributeString("name", folder.Name);
                         Write(xmlWriter, folder);
                         xmlWriter.WriteEndElement();
                         break;
                     case File leapfile:
                         xmlWriter.WriteStartElement("File");
                         xmlWriter.WriteAttributeString("name", leapfile.Name);
-                        xmlWriter.WriteAttributeString("updated", leapfile.ParseUpdated());
+                        xmlWriter.WriteAttributeString("updated", leapfile.GetUpdatedDateString());
                         xmlWriter.WriteEndElement();
                         break;
                 }
@@ -78,5 +82,7 @@ namespace FileSearchr
             xmlDocument.LoadXml(_xmlString);
             xmlDocument.Save(saveFile);
         }
+
+
     }
 }

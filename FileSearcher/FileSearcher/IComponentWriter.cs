@@ -4,8 +4,6 @@ namespace FileSearchr
 {
     public interface IComponentWriter
     {
-        Component Root { get; set; }
-        void Write();
-        void Save(string saveFile);
+        void Write(Component root, string saveFile);
     }
 }

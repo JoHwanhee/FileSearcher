@@ -13,10 +13,7 @@ namespace FileSearchConsole
         {
             FileSearchConfig config = FileSearchConfig.Instance;
             FileSearchManager fileSearchManager = new FileSearchManager(config);
-            fileSearchManager.Serach();
-            fileSearchManager.Write();
-            fileSearchManager.Save();
-            fileSearchManager.Close();
+            fileSearchManager.Run();
         }
     }
 }

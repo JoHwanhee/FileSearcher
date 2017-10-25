@@ -1,24 +1,27 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace FileSearchr.Composite
 {
     public class Directory : Component
     {
-        private readonly List<Component> _files = new List<Component>();
-        
-        public void AddComponent(Component component)
+        public Directory(DirectoryInfo directoryInfo)
         {
-            _files.Add(component);
+            Type = "Directory";
+            FullName = directoryInfo.FullName;
+            Name = directoryInfo.Name;
+            Updated = directoryInfo.LastWriteTime;
+
+        }
+        public Directory()
+        {
+            Type = "Root";
+            FullName = "";
+            Name = "";
+            Updated = DateTime.Now;
+
         }
 
-        public void RemoveComponent(Component component)
-        {
-            _files.Remove(component);
-        }
-
-        public IEnumerable<Component> GetFiles()
-        {
-            return _files;
-        }
     }
 }
