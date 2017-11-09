@@ -13,23 +13,23 @@ namespace FileSearchr
         private readonly string _searchDir;
         private readonly string _saveFile;
         private readonly DateTime _compareTime;
-        private Directory _rootDirectory;
 
+        public Directory RootDirectory { get; private set; }
         public string[] IgnoreFolders { get; set; } = { "bin", "obj", ".vs", "packages" };
-        public string[] IgnoreFiles { get; set; } = {".dll", ".pdb", ".csproj", ".sln", "Designer.cs", ".resx", "app.config", "packages.config", "App.xaml.cs" };
-        
+        public string[] IgnoreFiles { get; set; } = { ".dll", ".pdb", ".csproj", ".sln", "Designer.cs", ".resx", "app.config", "packages.config", "App.xaml.cs" };
+
         public FileSearchManager(FileSearchConfig config)
         {
             _componentWriter = config.Writer;
             _searchDir = config.SearchDir;
             _saveFile = config.SaveFile;
             _compareTime = config.CompareTime;
-            _rootDirectory = new Directory();
+            RootDirectory = new Directory();
         }
 
         public void Write()
         {
-            _componentWriter.Write(_rootDirectory, _saveFile);
+            _componentWriter.Write(RootDirectory, _saveFile);
         }
 
         public void Serach()
@@ -38,14 +38,15 @@ namespace FileSearchr
             Search(rootDirectory, _searchDir, _compareTime);
             if (rootDirectory.Children.Count == 1)
             {
-                _rootDirectory = rootDirectory.Children[0] as Directory;
+                RootDirectory = rootDirectory.Children[0] as Directory;
             }
             else
             {
-                _rootDirectory = rootDirectory;
+                RootDirectory = rootDirectory;
             }
         }
 
+        // 재귀호출로 파일/폴더 검색하여 추가 한다.
         public void Search(Component parentComponent, string currentFolderName, DateTime compareTime)
         {
             try
@@ -53,7 +54,6 @@ namespace FileSearchr
                 DirectoryInfo currentDirectoryInfo = new DirectoryInfo(currentFolderName);
                 Directory currentDirectory = new Directory(currentDirectoryInfo);
 
-                
                 foreach (var file in currentDirectoryInfo.GetFiles())
                 {
                     bool isMatched = false;
@@ -70,6 +70,7 @@ namespace FileSearchr
                         currentDirectory.AddChlid(new File(file));
                     }
                 }
+
 
                 foreach (var direcotory in System.IO.Directory.GetDirectories(currentFolderName))
                 {
@@ -92,9 +93,8 @@ namespace FileSearchr
             {
                 Console.WriteLine(excpt.Message);
             }
-
-
         }
+
         public void Close()
         {
             Dispose();

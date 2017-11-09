@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSearchConsole", "FileSe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSearcher", "FileSearcher\FileSearcher.csproj", "{4D43CC4F-FB13-41AF-A248-B1F694A33542}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSearcherWindow", "FileSearcherWindow\FileSearcherWindow.csproj", "{F6E9582C-759F-424E-A24B-62F72AB1A72C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{4D43CC4F-FB13-41AF-A248-B1F694A33542}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D43CC4F-FB13-41AF-A248-B1F694A33542}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D43CC4F-FB13-41AF-A248-B1F694A33542}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6E9582C-759F-424E-A24B-62F72AB1A72C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6E9582C-759F-424E-A24B-62F72AB1A72C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6E9582C-759F-424E-A24B-62F72AB1A72C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6E9582C-759F-424E-A24B-62F72AB1A72C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

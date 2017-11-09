@@ -1,0 +1,25 @@
+﻿<Window x:Class="FileSearcherWindow.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FileSearcherWindow.ViewModels"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+
+    <Window.DataContext>
+        <local:MainViewModel />
+    </Window.DataContext>
+    <StackPanel>
+        <ListView ItemsSource="{Binding RootComponent.Children}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Type" Width="100" DisplayMemberBinding ="{Binding Type}"/>
+                    <GridViewColumn Header="FileName" Width="100" DisplayMemberBinding ="{Binding Name}"/>
+                    <GridViewColumn Header="Updated" Width="100" DisplayMemberBinding ="{Binding Updated}" HeaderStringFormat="yyyy-dd-mm"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </StackPanel>
+</Window>
+

@@ -8,7 +8,7 @@ using File = FileSearchr.Composite.File;
 
 namespace FileSearchr
 {
-    public class XmlComponentWriter : IComponentWriter
+    public class ResultXmlWriter : IComponentWriter
     {
         private string _xmlString;
 
@@ -82,7 +82,5 @@ namespace FileSearchr
             xmlDocument.LoadXml(_xmlString);
             xmlDocument.Save(saveFile);
         }
-
-
     }
 }

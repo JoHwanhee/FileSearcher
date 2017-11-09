@@ -12,7 +12,6 @@ namespace FileSearchr.Composite
             FullName = directoryInfo.FullName;
             Name = directoryInfo.Name;
             Updated = directoryInfo.LastWriteTime;
-
         }
         public Directory()
         {
