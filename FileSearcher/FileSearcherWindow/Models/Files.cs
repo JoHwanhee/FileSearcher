@@ -17,11 +17,12 @@ namespace FileSearcherWindow.Models
         {
             FileSearchConfig config = FileSearchConfig.Instance;
             config.Writer = new ResultXmlWriter();
-            config.SearchDir = @"C:\Users\ChoHwanhee\Desktop\java";
+            config.SearchDir = @"D:\Projects\4. 부산스마트시티\문서";
             config.CompareTime = DateTime.Parse("2015-10-10");
-            FileSearchManager fileSearchManager = new FileSearchManager(config);
-            fileSearchManager.Run();
-            Root = fileSearchManager.RootDirectory;
+            
+            FileSearchManager filemanager = new FileSearchManager();
+            filemanager.Run();
+            Root = filemanager.RootDirectory;
         }
 
     }

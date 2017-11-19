@@ -10,8 +10,18 @@
     <Window.DataContext>
         <local:MainViewModel />
     </Window.DataContext>
-    <StackPanel>
-        <ListView ItemsSource="{Binding RootComponent.Children}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="0"/>
+
+        
+        <TreeView></TreeView>
+
+        <ListView Grid.Column="0" ItemsSource="{Binding RootComponent.Children}" Background="{x:Null}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Type" Width="100" DisplayMemberBinding ="{Binding Type}"/>
@@ -20,6 +30,8 @@
                 </GridView>
             </ListView.View>
         </ListView>
-    </StackPanel>
+
+        <TextBox  Grid.Column="1"></TextBox>
+    </Grid>
 </Window>
 

@@ -11,9 +11,17 @@ namespace FileSearchConsole
     {
         static void Main(string[] args)
         {
-            FileSearchConfig config = FileSearchConfig.Instance;
-            FileSearchManager fileSearchManager = new FileSearchManager(config);
-            fileSearchManager.Run();
+            try
+            {
+                FileSearchManager manager = new FileSearchManager();
+                manager.Delete();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            Console.Read();
         }
     }
 }
