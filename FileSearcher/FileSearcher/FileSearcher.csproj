@@ -47,11 +47,10 @@
   <ItemGroup>
     <Compile Include="Composite\Component.cs" />
     <Compile Include="Attribute\ComponentInfoAttribute.cs" />
-    <Compile Include="Composite\Directory.cs" />
+    <Compile Include="Composite\Folder.cs" />
     <Compile Include="Composite\File.cs" />
     <Compile Include="FileSearchConfig.cs" />
-    <Compile Include="FileSearcher.cs" />
-    <Compile Include="FileSearchManager.cs" />
+    <Compile Include="FileManager.cs" />
     <Compile Include="IComponentWriter.cs" />
     <Compile Include="ResultTextWriter.cs" />
     <Compile Include="ResultXmlWriter.cs" />

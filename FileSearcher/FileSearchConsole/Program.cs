@@ -13,8 +13,13 @@ namespace FileSearchConsole
         {
             try
             {
-                FileSearchManager manager = new FileSearchManager();
-                manager.Delete();
+                FileSearchConfig config = FileSearchConfig.Instance;
+                FileManager manager = new FileManager(config.SearchDir);
+                manager.IgnoreFolders(config.IgnoreFolders);
+                manager.IgnoreFiles(config.IgnoreFiles);
+                manager.IgnoreByTime(config.CompareTime);
+                manager.DeletesFolders(config.DeleteFolders);
+                manager.Write(config.SaveFile, config.Writer);
             }
             catch (Exception e)
             {

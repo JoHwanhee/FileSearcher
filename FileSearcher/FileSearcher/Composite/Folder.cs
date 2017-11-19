@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace FileSearchr.Composite
 {
-    public class Directory : Component
+    public class Folder : Component
     {
-        public Directory(DirectoryInfo directoryInfo)
+        public Folder(DirectoryInfo directoryInfo)
         {
-            Type = "Directory";
+            Type = "Folder";
             FullName = directoryInfo.FullName;
             Name = directoryInfo.Name;
             Updated = directoryInfo.LastWriteTime;
         }
-        public Directory()
+        public Folder()
         {
             Type = "Root";
             FullName = "";
@@ -21,6 +22,6 @@ namespace FileSearchr.Composite
             Updated = DateTime.Now;
 
         }
-
+        
     }
 }

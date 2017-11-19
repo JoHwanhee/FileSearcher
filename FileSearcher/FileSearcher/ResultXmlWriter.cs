@@ -3,7 +3,6 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using FileSearchr.Composite;
-using Directory = FileSearchr.Composite.Directory;
 using File = FileSearchr.Composite.File;
 
 namespace FileSearchr
@@ -14,7 +13,7 @@ namespace FileSearchr
 
         public void Write(Component root, string saveFile)
         {
-            Write(root as Directory);
+            Write(root as Folder);
             Save(saveFile);
         }
 
@@ -26,7 +25,7 @@ namespace FileSearchr
             return settings;
         }
 
-        public void Write(Directory root)
+        public void Write(Folder root)
         {
             try
             {
@@ -49,7 +48,7 @@ namespace FileSearchr
             }
         }
 
-        private void Write(XmlWriter xmlWriter, Directory root)
+        private void Write(XmlWriter xmlWriter, Folder root)
         {
             if (root == null)
             {
@@ -58,9 +57,14 @@ namespace FileSearchr
 
             foreach (var component in root.Children)
             {
+                if (component.IsIgnore)
+                {
+                    continue;
+                }
+
                 switch (component)
                 {
-                    case Directory folder:
+                    case Folder folder:
                         xmlWriter.WriteStartElement("Folder");
                         xmlWriter.WriteAttributeString("name", folder.Name);
                         Write(xmlWriter, folder);

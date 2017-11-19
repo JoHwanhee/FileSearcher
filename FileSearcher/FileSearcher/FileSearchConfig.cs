@@ -10,6 +10,7 @@ namespace FileSearchr
 
         public static FileSearchConfig Instance => lazy.Value;
 
+        // todo : It can use .config file when program load.
         private FileSearchConfig()
         {
         }

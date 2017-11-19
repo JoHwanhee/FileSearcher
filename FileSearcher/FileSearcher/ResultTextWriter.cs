@@ -3,7 +3,6 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using FileSearchr.Composite;
-using Directory = FileSearchr.Composite.Directory;
 using File = FileSearchr.Composite.File;
 
 namespace FileSearchr
@@ -12,21 +11,26 @@ namespace FileSearchr
     {
         public void Write(Component root, string saveFile)
         {
-            using (System.IO.StreamWriter file =
-                new System.IO.StreamWriter(saveFile))
+            using (StreamWriter file =
+                new StreamWriter(saveFile))
             {
-                Write(root as Directory, root.FullName.Length+1, file);
+                Write(root as Folder, root.FullName.Length+1, file);
             }
 
         }
 
-        private void Write(Directory currentDirectory, int rootPathLenth, StreamWriter streamWriter)
+        private void Write(Folder currentFolder, int rootPathLenth, StreamWriter streamWriter)
         {
-            foreach (var child in currentDirectory.Children)
+            foreach (var child in currentFolder.Children)
             {
+                if (child.IsIgnore)
+                {
+                    continue;
+                }
+
                 switch (child)
                 {
-                    case Directory directory:
+                    case Folder directory:
                         Write(directory, rootPathLenth, streamWriter);
                         break;
                     case File file:
